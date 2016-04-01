@@ -1,7 +1,7 @@
 package dataManager;
 
 public class DateIP {
-public DateIP(){
-	
-}
+	public DateIP() {
+
+	}
 }

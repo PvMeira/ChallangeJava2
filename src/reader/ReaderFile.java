@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import dataManager.BandWidth;
 import dataManager.DateIP;
@@ -28,31 +26,25 @@ public class ReaderFile {
 				List<DateIP> DATA = new ArrayList<DateIP>();
 				List<BandWidth> BAND = new ArrayList<BandWidth>();
 				while (br.ready()) {
-					
+
 					String line = br.readLine();
-					
+
 					String[] ip = line.split(" - - ");
 					String IpEndress = ip[0];
 					Ip ipList = new Ip(IpEndress);
 					IP.add(ipList);
-					
+
 					String[] data = line.split("\"");
 					String dataLine = data[0];
 					DateIP date = new DateIP();
 					DATA.add(date);
-					
-										
 
-					
-					String[] bandwidth=line.split("\"-");
-					String typyFile=bandwidth[0];
-					int numberband=Integer.parseInt(bandwidth[1]);
-					BandWidth band= new BandWidth(typyFile,numberband);
+					String[] bandwidth = line.split("\"-");
+					String typyFile = bandwidth[0];
+					int numberband = Integer.parseInt(bandwidth[1]);
+					BandWidth band = new BandWidth(typyFile, numberband);
 					BAND.add(band);
-					
-					
-					
-					
+
 				}
 
 			}
