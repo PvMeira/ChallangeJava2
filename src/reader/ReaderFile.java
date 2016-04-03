@@ -7,11 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import collect.Browsercounter;
+import collect.SystemCounter;
 import dataManager.BandWidth;
 import dataManager.DateIP;
 import dataManager.Ip;
 
 public class ReaderFile {
+
+	private SystemCounter system1;
+	private Browsercounter browser1;
 
 	public void readFile() throws IOException {
 
@@ -24,7 +29,7 @@ public class ReaderFile {
 				BufferedReader br = new BufferedReader(new FileReader(file));
 				List<Ip> IP = new ArrayList<Ip>();
 				List<DateIP> DATA = new ArrayList<DateIP>();
-				List<BandWidth> BAND = new ArrayList<BandWidth>();
+
 				while (br.ready()) {
 
 					String line = br.readLine();
@@ -38,16 +43,14 @@ public class ReaderFile {
 					String dataLine = data[0];
 					DateIP date = new DateIP();
 					DATA.add(date);
-
-					String[] bandwidth = line.split("\"-");
-					String typyFile = bandwidth[0];
-					int numberband = Integer.parseInt(bandwidth[1]);
-					BandWidth band = new BandWidth(typyFile, numberband);
-					BAND.add(band);
+					this.system1 = new SystemCounter(dataLine);
+					this.browser1 = new Browsercounter(dataLine);
 
 				}
 
 			}
 		}
+		System.out.println(system1);
+		System.out.println(browser1);
 	}
 }
