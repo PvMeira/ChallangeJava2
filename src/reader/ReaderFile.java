@@ -7,7 +7,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import collect.CounterBand;
 import collect.CounterBrowser;
+import collect.CounterDystinctIP;
 import collect.CounterSystem;
 import collect.NoAcessCounter;
 
@@ -25,6 +27,8 @@ public class ReaderFile {
 		mainList.add(new CounterSystem());
 		mainList.add(new CounterBrowser());
 		mainList.add(new NoAcessCounter());
+		mainList.add(new CounterBand());
+		mainList.add(new CounterDystinctIP());
 
 		c.begin();
 

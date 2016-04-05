@@ -1,11 +1,11 @@
 package reader;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Chronometer {
-	private long timeStart;
-	private long timeEnd;
+	private LocalDateTime timeStart;
+	private LocalDateTime timeEnd;
 
 	public Chronometer() {
 	}
@@ -19,16 +19,19 @@ public class Chronometer {
 		printDuration();
 	}
 
-	private long timeNow(String inf) {
-		return Calendar.getInstance().getTimeInMillis();
+	private LocalDateTime timeNow(String inf) {
+		return LocalDateTime.now();
 	}
 
 	private void printDuration() {
-		printTime("\nBEGIN:", timeStart);
-		printTime("END:", timeEnd);
+
+		result();
+
 	}
 
-	private void printTime(String inf, long timeInMillis) {
-		System.out.println(inf + ": " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS").format(timeInMillis));
+	private void result() {
+		Duration duration = Duration.between(timeStart, timeEnd);
+		System.out.println("Time in sec:\n" + duration);
 	}
+
 }

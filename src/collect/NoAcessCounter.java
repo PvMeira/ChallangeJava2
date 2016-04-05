@@ -21,8 +21,8 @@ public class NoAcessCounter implements dataManager.Analysis {
 	@Override
 	public void collectInformation(String line) {
 		String date = line.split(" - - ")[1].substring(1, 21);
-		LocalDateTime dateNow = LocalDateTime.parse(date,
-				DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss").withLocale(Locale.ENGLISH));
+		LocalDateTime dateNow = LocalDateTime.parse(date,DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss").withLocale(Locale.ENGLISH));
+				
 
 		if (OldDate != null) {
 			long duration = (durationBetweenDates(OldDate, dateNow));

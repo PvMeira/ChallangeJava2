@@ -14,4 +14,14 @@ public interface Constants {
 	final String SAFARI_PATTERN = "Safari";
 	final String MSIE_PATTERN = "MSIE";
 	final String OPERA_PATTERN = "Opera";
+	// Band contants
+	final String DOCX_PATTERN = ".docx";
+	final String TXT_PATTERN = ".txt";
+	final String CSV_PATTERN = ".csv";
+	final String PNG_PATTERN = ".png";
+	final String JPG_PATTERN = ".jpg";
+	final String GIF_PATTERN = ".gif";
+	final String CSS_PATTERN = ".css";
+	final String JS_PATTERN = ".js";
+	final String I_PATTERN = ".i";
 }
