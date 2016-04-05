@@ -32,16 +32,13 @@ public class CounterBrowser extends AbstractCountMap implements Constants, dataM
 	@Override
 	String toStringTitle() {
 
-		return "\nTop Brpwsers : \n";
+		return "\nTop Browsers : \n";
 	}
 
 	@Override
 	String toStringMessagePattern() {
 
-		return "The browser was useed ";
+		return "\nThe browser was useed %s times \n";
 	}
 
 }
-
-// String toStringMessagePattern() {
-// return "* The browser %s was used %s times.\n";

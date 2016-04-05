@@ -2,44 +2,40 @@ package reader;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import collect.CounterBrowser;
+import collect.CounterSystem;
+import collect.NoAcessCounter;
 
 public class ReaderFile {
 
-	String LINE;
+	private List<dataManager.Analysis> mainList = new ArrayList<>();
+	private Chronometer c = new Chronometer();
 
-	Scanner read;
+	public static void main(String[] args) throws IOException {
 
-	public void readFile() throws IOException {
-		try {
-			String userhome = System.getProperty("user.home");
-			File folder = new File(userhome + File.separator + "data" + File.separator + "in");
+		new ReaderFile();
+	}
 
-			for (File file : folder.listFiles()) {
-				if (file.getName().endsWith(".log")) {
-					read = new Scanner(file);
-					read.useDelimiter("\\n");
-					while (read.hasNextLine()) {
+	public ReaderFile() throws IOException {
+		mainList.add(new CounterSystem());
+		mainList.add(new CounterBrowser());
+		mainList.add(new NoAcessCounter());
 
-						String line = read.nextLine();
-						String[] allRest = line.split(" - - ");
-						String newLine = allRest[0];
-						CounterBrowser collect = new CounterBrowser();
-						collect.collectInformation(newLine);
+		c.begin();
 
-					}
+		List<String> FileLines = Files
+				.readAllLines(Paths.get(new File("").getAbsolutePath().concat("\\LOGfile"), "access.log"));
 
-				}
-			}
-		} catch (Exception e) {
+		FileLines.forEach(line -> {
+			mainList.forEach(analysis -> analysis.collectInformation(line));
+		});
 
-			e.printStackTrace();
-
-		} finally {
-			read.close();
-		}
-
+		mainList.forEach(analysis -> analysis.showInformations());
+		c.close();
 	}
 }
