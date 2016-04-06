@@ -24,22 +24,28 @@ public class ReaderFile {
 	}
 
 	public ReaderFile() throws IOException {
+
+		List<String> fileLines;
+		fileLines = Files.readAllLines(Paths.get(new File("").getAbsolutePath().concat("\\LOGfile"), "access.log"));
+		readAllFiles();
+
+		c.printCurrentTime("Start");
+
+		mainList.forEach(analysis -> {
+			new Thread(() -> {
+				fileLines.forEach(line -> analysis.collectInformation(line));
+
+				analysis.showInformations();
+				c.printCurrentTime(analysis.getClass().getSimpleName());
+			}).start();
+		});
+	}
+
+	public void readAllFiles() {
 		mainList.add(new CounterSystem());
 		mainList.add(new CounterBrowser());
 		mainList.add(new NoAcessCounter());
 		mainList.add(new CounterBand());
 		mainList.add(new CounterDystinctIP());
-
-		c.begin();
-
-		List<String> FileLines = Files
-				.readAllLines(Paths.get(new File("").getAbsolutePath().concat("\\LOGfile"), "access.log"));
-
-		FileLines.forEach(line -> {
-			mainList.forEach(analysis -> analysis.collectInformation(line));
-		});
-
-		mainList.forEach(analysis -> analysis.showInformations());
-		c.close();
 	}
 }

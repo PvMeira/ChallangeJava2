@@ -8,17 +8,13 @@ public class CounterBrowser extends AbstractCountMap implements Constants, dataM
 	public void collectInformation(String line) {
 		if (line.indexOf(CHROME_PATTERN) != -1) {
 			increment(CHROME_PATTERN);
-		}
-		if (line.indexOf(MOZILLA_PATTERN) != -1) {
+		} else if (line.indexOf(MOZILLA_PATTERN) != -1) {
 			increment(MOZILLA_PATTERN);
-		}
-		if (line.indexOf(SAFARI_PATTERN) != -1) {
+		} else if (line.indexOf(SAFARI_PATTERN) != -1) {
 			increment(SAFARI_PATTERN);
-		}
-		if (line.indexOf(MSIE_PATTERN) != -1) {
+		} else if (line.indexOf(MSIE_PATTERN) != -1) {
 			increment(MSIE_PATTERN);
-		}
-		if (line.indexOf(OPERA_PATTERN) != -1) {
+		} else if (line.indexOf(OPERA_PATTERN) != -1) {
 			increment(OPERA_PATTERN);
 		}
 

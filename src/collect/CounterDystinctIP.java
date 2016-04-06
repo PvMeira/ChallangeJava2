@@ -13,37 +13,31 @@ import dataManager.Analysis;
 
 public class CounterDystinctIP implements Analysis {
 	private int counterIP = 0;
-	private Map<String, Date> visit = new HashMap<String, Date>();
+	private Map<String, LocalDateTime> visit = new HashMap<String, LocalDateTime>();
 
 	@Override
 	public void collectInformation(String line) {
-		String ip = line;
-
 		String[] ipsValid = line.split("- -")[0].split(" ");
-		@SuppressWarnings("unused")
 		String ipValidLine = ipsValid[ipsValid.length - 1];
 		String date = line.split(" - - ")[1].substring(1, 21);
 		LocalDateTime stringToDate = LocalDateTime.parse(date,
 				DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss").withLocale(Locale.ENGLISH));
 
-		Date firstAcess = visit.get(ip);
+		LocalDateTime firstAcess = visit.get(ipValidLine);
 
 		if (firstAcess == null) {
-			visit.put(ip, firstAcess);
+			visit.put(ipValidLine, stringToDate);
 			counterIP++;
 		} else {
-			@SuppressWarnings("unused")
-			boolean diferenceInMinutes = takeDiferenceInMinutes(firstAcess, stringToDate);
-			if (diferenceInMinutes = true) {
-				visit.put(ip, firstAcess);
+			if (takeDiferenceInMinutes(firstAcess, stringToDate)) {
+				visit.put(ipValidLine, stringToDate);
 				counterIP++;
-			}
+			} 
 		}
 	}
 
-	private boolean takeDiferenceInMinutes(Date firstAcess, LocalDateTime stringToDate) {
-		Duration duration = Duration.between((Temporal) firstAcess, stringToDate);
-
+	private boolean takeDiferenceInMinutes(LocalDateTime firstAcess, LocalDateTime stringToDate) {
+		Duration duration = Duration.between(firstAcess, stringToDate);
 		return (duration.toMillis() > 1800000);
 	}
 
